@@ -2,7 +2,7 @@
 
 A **global command palette** (`Cmd+K` / `Ctrl+K`) for Laravel 11/12 applications. Search models, navigate routes, and execute commands from anywhere.
 
-![OmniSearch Screenshot](./docs/screenshot.png)
+![OmniSearch Screenshot](docs/screenshot.png)
 
 ## Features
 

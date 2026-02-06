@@ -32,4 +32,18 @@ interface SearchSource
      * Get the icon identifier for this source.
      */
     public function getIcon(): string;
+
+    /**
+     * Get synonyms/aliases for search terms.
+     *
+     * @return array<string, string>
+     */
+    public function getSynonyms(): array;
+
+    /**
+     * Get dependencies for this source (used by CommandSource).
+     *
+     * @return array<string, class-string>
+     */
+    public function getDependencies(): array;
 }

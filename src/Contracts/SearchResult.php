@@ -35,9 +35,19 @@ interface SearchResult
     public function getGroup(): string;
 
     /**
-     * Get the action type: 'navigate', 'action', or 'copy'.
+     * Get the action type: 'navigate', 'copy', or 'modal'.
      */
     public function getActionType(): string;
+
+    /**
+     * Get the relevance score for sorting (higher is better).
+     */
+    public function getScore(): ?float;
+
+    /**
+     * Get additional payload for action types (text to copy, modal name, etc.).
+     */
+    public function getActionPayload(): ?string;
 
     /**
      * Convert to array for JSON serialization.

@@ -29,6 +29,22 @@ class RouteSource implements SearchSource
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getSynonyms(): array
+    {
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDependencies(): array
+    {
+        return [];
+    }
+
     public function search(string $query): Collection
     {
         $includePatterns = config('omnisearch.routes.include', ['*']);

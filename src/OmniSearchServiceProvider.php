@@ -4,6 +4,9 @@ namespace OmniSearch;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use OmniSearch\Console\ClearCacheCommand;
+use OmniSearch\Console\InstallCommand;
+use OmniSearch\Console\MakeSourceCommand;
 use OmniSearch\Http\Livewire\SearchModal;
 use OmniSearch\Services\SearchManager;
 
@@ -28,9 +31,19 @@ class OmniSearchServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->registerTranslations();
         $this->registerPublishing();
         $this->registerViews();
         $this->registerLivewireComponents();
+        $this->registerCommands();
+    }
+
+    /**
+     * Register the package translations.
+     */
+    protected function registerTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'omnisearch');
     }
 
     /**
@@ -49,10 +62,16 @@ class OmniSearchServiceProvider extends ServiceProvider
                 __DIR__ . '/../resources/views' => resource_path('views/vendor/omnisearch'),
             ], 'omnisearch-views');
 
+            // Translations
+            $this->publishes([
+                __DIR__ . '/../lang' => lang_path('vendor/omnisearch'),
+            ], 'omnisearch-lang');
+
             // Full publish
             $this->publishes([
                 __DIR__ . '/../config/omnisearch.php' => config_path('omnisearch.php'),
                 __DIR__ . '/../resources/views' => resource_path('views/vendor/omnisearch'),
+                __DIR__ . '/../lang' => lang_path('vendor/omnisearch'),
             ], 'omnisearch');
         }
     }
@@ -71,5 +90,19 @@ class OmniSearchServiceProvider extends ServiceProvider
     protected function registerLivewireComponents(): void
     {
         Livewire::component('omnisearch', SearchModal::class);
+    }
+
+    /**
+     * Register console commands.
+     */
+    protected function registerCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                InstallCommand::class,
+                MakeSourceCommand::class,
+                ClearCacheCommand::class,
+            ]);
+        }
     }
 }

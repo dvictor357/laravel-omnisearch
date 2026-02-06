@@ -1,6 +1,6 @@
 {
 	"name": "dvictor357/laravel-omnisearch",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "A global command palette (Cmd+K) for Laravel applications. Search models, navigate routes, and execute commands from anywhere.",
 	"keywords": [
 		"laravel",
